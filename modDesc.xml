@@ -29,6 +29,7 @@ GitHub-Link: https://github.com/Timmeey86/FS25_TramlineShopFilter
 	<iconFilename>icon_TramlineShopFilter.dds</iconFilename>
 
 	<extraSourceFiles>
+		<sourceFile filename="scripts/TramlineWidthChecker.lua" />
 		<sourceFile filename="scripts/TramlineShopFilter.lua" />
 	</extraSourceFiles>
 
