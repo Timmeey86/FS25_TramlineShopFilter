@@ -1,37 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
-	<author>Farmsim Tim (timmeey86)</author>
-	<version>0.0.0.1</version>
-	<title>
-		<en>Tramline Shop Filter</en>
-		<de>Fahrgassen-Shopfilter</de>
-	</title>
-	
-	<description>
-		<en><![CDATA[
+  <author>Farmsim Tim (timmeey86)</author>
+  <version>0.0.0.10</version>
+  <title>
+    <en>Tramline Shop Filter</en>
+    <de>Fahrgassen-Shopfilter</de>
+  </title>
+  <description>
+    <en><![CDATA[
 Description: 
 
 Hotkeys: 
 
 GitHub link: https://github.com/Timmeey86/FS25_TramlineShopFilter
 ]]></en>
-		<de><![CDATA[
+    <de><![CDATA[
 Beschreibung: 
 
 Tastenkombinationen: 
 
 GitHub-Link: https://github.com/Timmeey86/FS25_TramlineShopFilter
 ]]></de>
-	</description>
-	
-	<multiplayer supported="false" />
-
-	<iconFilename>icon_TramlineShopFilter.dds</iconFilename>
-
-	<extraSourceFiles>
-		<sourceFile filename="scripts/TramlineWidthChecker.lua" />
-		<sourceFile filename="scripts/TramlineShopFilter.lua" />
-	</extraSourceFiles>
-
-	<l10n filenamePrefix="i18n/locale" />
+  </description>
+  <multiplayer supported="false" />
+  <iconFilename>icon_TramlineShopFilter.dds</iconFilename>
+  <extraSourceFiles>
+    <sourceFile filename="scripts/TramlineWidthChecker.lua" />
+    <sourceFile filename="scripts/WorkWidthRetriever.lua" />
+  </extraSourceFiles>
+  <!--<l10n filenamePrefix="i18n/locale" />-->
 </modDesc>

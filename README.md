@@ -6,7 +6,7 @@
 
 ## Mod description
 
-This mod is in early development stages. It doesn't work yet.
+This mod is in early development stage. It doesn't work yet.
 
 ## Screenshots
 
