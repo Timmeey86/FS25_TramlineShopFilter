@@ -5,14 +5,6 @@ TramlineWidthChecker = {
 	EPSILON = 0.001
 }
 
----Checks whether or not two numbers are almost equal, respecting floating point imprecision
----@param first number @The first number
----@param second number @The second number
----@return boolean @True if the numbers are almost equal
-local function nearlyEqual(first, second)
-	return math.abs(first - second) < TramlineWidthChecker.EPSILON
-end
-
 ---Checks whether or not a number is between two other numbers, respecting floating point imprecision
 ---@param value number @The value
 ---@param lowerBound number @The lower bound
