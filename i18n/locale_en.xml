@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<l10n>
+	<translationContributors/>
+	<texts>
+		<text name="tsf_DialogTitle" text="Tramline Shop Filter" />
+		<text name="tsf_DialogText" text="Do you want to filter the shop for a certain tram line width?" />
+	</texts>
+</l10n>
