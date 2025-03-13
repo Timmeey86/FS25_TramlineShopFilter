@@ -22,8 +22,6 @@ function TramlineShopFilterDialog.new(callbackTarget, filterFunc)
 
 	-- Forward the yes/no click to this class, which will then only forward it to the callback target in the "yes" case
 	self:setCallback(TramlineShopFilterDialog.onYesNo, self)
-	self:setTitle(g_i18n:getText("tsf_DialogTitle"))
-	self:setText(g_i18n:getText("tsf_DialogText"))
 	return self
 end
 
@@ -47,5 +45,7 @@ end
 
 ---Displays the dialog
 function TramlineShopFilterDialog:show()
+	self:setTitle(g_i18n:getText("tsf_DialogTitle"))
+	self:setText(g_i18n:getText("tsf_DialogText"))
 	g_gui:showDialog(TramlineShopFilterDialog.DIALOG_ID)
 end
