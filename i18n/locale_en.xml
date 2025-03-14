@@ -2,7 +2,9 @@
 <l10n>
 	<translationContributors/>
 	<texts>
-		<text name="tsf_DialogTitle" text="Tramline Shop Filter" />
-		<text name="tsf_DialogText" text="Do you want to filter the shop for a certain tram line width?" />
+		<text name="tsf_dialogTitle" text="Tramline Shop Filter" />
+		<text name="tsf_dialogIntro" text="The shop will be filtered to show only implements which are suitable for the following tramline settings:" />
+		<text name="tsf_tramlineLabel" text="Work width of the sprayer" />
+		<text name="tsf_toleranceLabel" text="Max. difference between work width of the sprayer and multiplied implement width" />
 	</texts>
 </l10n>
