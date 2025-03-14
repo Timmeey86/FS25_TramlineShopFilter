@@ -21,7 +21,7 @@ end
 ---@return boolean @True if the work width is suitable for the tramline
 function TramlineWidthChecker.workWidthIsCompatible(workWidth, tramlineWidth, tolerance)
 	if not tonumber(workWidth) or not tonumber(tramlineWidth) or not tonumber(tolerance) or
-		workWidth <= 0 or tramlineWidth <= 0 or tolerance < 0 then
+		tonumber(workWidth) <= 0 or tonumber(tramlineWidth) <= 0 or tonumber(tolerance) < 0 then
 		Logging.warning("Received invalid input values: %s, %s, %s", workWidth, tramlineWidth, tolerance)
 		return false
 	end

@@ -22,7 +22,7 @@ for i = 1, 48 do
 	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTHS, i)
 	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS, g_i18n:formatDistance(i, 0, false))
 end
-for i = 1, 10 do
+for i = 0, 10 do
 	table.insert(TramlineShopFilterDialog.TOLERANCES, i / 10)
 	table.insert(TramlineShopFilterDialog.TOLERANCE_STRINGS, g_i18n:formatDistance(i / 10, 1, false))
 	print(g_i18n:formatDistance(i/10, 1, false))
@@ -59,8 +59,8 @@ end
 ---@param yesWasPressed boolean @True if yes was pressed, false otherwise
 function TramlineShopFilterDialog:onYesNo(yesWasPressed)
 	if yesWasPressed then
-		local tramlineWidth = TramlineShopFilterDialog.TRAMLINE_WIDTHS[self.tramlineWidthSlider.state or 1]
-		local tolerance = TramlineShopFilterDialog.TOLERANCES[self.toleranceSlider.state or 1]
+		local tramlineWidth = tonumber(TramlineShopFilterDialog.TRAMLINE_WIDTHS[self.tramlineWidthSlider.state or 1])
+		local tolerance = tonumber(TramlineShopFilterDialog.TOLERANCES[self.toleranceSlider.state or 1])
 		self.filterFunc(self.filterFuncTarget, tramlineWidth, tolerance)
 	end
 end
