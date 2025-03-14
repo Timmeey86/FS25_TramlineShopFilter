@@ -10,13 +10,9 @@
 			<Text profile="yesNoDialogTitle" text="$l10n_tsf_dialogTitle" id="dialogTitleElement" position="0px -20px"/>
 			<Text profile="yesNoDialogTextWithTitle" text="$l10n_tsf_dialogIntro" id="dialogTextElement" position="0px -70px"/>
 			<Text profile="tsf_text" text="$l10n_tsf_tramlineLabel" id="tramlineLabel" position="0px 190px" />
-			<OptionSlider profile="tsf_slider" onClick="onClickTramlineWidth" id="tramlineWidthSlider" position="0px 150px" focusInit="onOpen">
-				<Text profile="tsf_sliderText" name="Text" />
-			</OptionSlider>
+			<OptionSlider profile="tsf_slider" onClick="onClickTramlineWidth" id="tramlineWidthSlider" position="0px 150px" focusInit="onOpen"/>
 			<Text profile="tsf_text" text="$l10n_tsf_toleranceLabel" id="toleranceLabel" position="0px 100px" />
-			<OptionSlider profile="tsf_slider" onClick="onClickTolerance" id="toleranceSlider" position="0px 40px">
-				<Text profile="tsf_sliderText" name="Text" />
-			</OptionSlider>
+			<OptionSlider profile="tsf_slider" onClick="onClickTolerance" id="toleranceSlider" position="0px 40px"/>
 		</GuiElement>
 		<BoxLayout profile="fs25_dialogButtonBox">
 			<Button profile="buttonYes" text="$l10n_button_ok" onClick="onYes" id="yesButton"/>
@@ -32,10 +28,6 @@
 			<textColor value="1 1 1 1"/>
 		</Profile>
 		<Profile name="tsf_slider" extends="fs25_optionSlider">
-		</Profile>
-		<Profile name="tsf_sliderText" extends="fs25_optionSliderText">
-			<!-- seems to have no effect -->
-			<textUpperCase value="false"/>
 		</Profile>
 	</GuiProfiles>
 </GUI>

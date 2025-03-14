@@ -51,7 +51,9 @@ end
 function TramlineShopFilterDialog:register()
 	local xmlPath = Utils.getFilename("gui/TramlineShopFilterDialog.xml", g_currentModDirectory)
 	g_gui:loadGui(xmlPath, TramlineShopFilterDialog.DIALOG_ID, self)
+	self.tramlineWidthSlider.textElement.textUpperCase = false
 	self.tramlineWidthSlider:setTexts(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS)
+	self.toleranceSlider.textElement.textUpperCase = false
 	self.toleranceSlider:setTexts(TramlineShopFilterDialog.TOLERANCE_STRINGS)
 end
 
@@ -66,7 +68,7 @@ end
 ---Displays the dialog
 function TramlineShopFilterDialog:show()
 
-
 	self:setDialogType(DialogElement.TYPE_QUESTION)
 	g_gui:showDialog(TramlineShopFilterDialog.DIALOG_ID)
+	print(self.tramlineWidthSlider.textElement.textUpperCase)
 end
