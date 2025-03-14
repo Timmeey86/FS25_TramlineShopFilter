@@ -2,8 +2,6 @@
 ---@class TramlineShopFilterDialog
 ---@field filterFunc function @The function which will be called when the user clicks yes in the filter dialog
 ---@field filterFuncTarget table @The instance which owns filterFunc
----@field tramlineWidth number @The tramline width in meters, as selected by the user
----@field tolerance number @The total tramline width tolerance in meters, as selected by the user
 ---@field DIALOG_ID string @The identifier of the dialog
 ---@field TRAMLINE_WIDTHS table @Contains the possible tramline widths as integers
 ---@field TRAMLINE_WIDTH_STRINGS table @Contains the readable strings of the tramline widths, including units
@@ -57,18 +55,18 @@ function TramlineShopFilterDialog:register()
 	self.toleranceSlider:setTexts(TramlineShopFilterDialog.TOLERANCE_STRINGS)
 end
 
----Reacts on yes/no presses
+---Reacts on yes/no presses and calls the callback function which was supplied to the constructor, in the yes case
 ---@param yesWasPressed boolean @True if yes was pressed, false otherwise
 function TramlineShopFilterDialog:onYesNo(yesWasPressed)
 	if yesWasPressed then
-		self.filterFunc(self.filterFuncTarget, self.tramlineWidth, self.tolerance)
+		local tramlineWidth = TramlineShopFilterDialog.TRAMLINE_WIDTHS[self.tramlineWidthSlider.state or 1]
+		local tolerance = TramlineShopFilterDialog.TOLERANCES[self.toleranceSlider.state or 1]
+		self.filterFunc(self.filterFuncTarget, tramlineWidth, tolerance)
 	end
 end
 
 ---Displays the dialog
 function TramlineShopFilterDialog:show()
-
 	self:setDialogType(DialogElement.TYPE_QUESTION)
 	g_gui:showDialog(TramlineShopFilterDialog.DIALOG_ID)
-	print(self.tramlineWidthSlider.textElement.textUpperCase)
 end
