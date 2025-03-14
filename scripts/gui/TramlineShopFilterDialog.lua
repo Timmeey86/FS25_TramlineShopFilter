@@ -5,12 +5,31 @@
 ---@field tramlineWidth number @The tramline width in meters, as selected by the user
 ---@field tolerance number @The total tramline width tolerance in meters, as selected by the user
 ---@field DIALOG_ID string @The identifier of the dialog
+---@field TRAMLINE_WIDTHS table @Contains the possible tramline widths as integers
+---@field TRAMLINE_WIDTH_STRINGS table @Contains the readable strings of the tramline widths, including units
+---@field TOLERANCES table @Contains the possible tolerances as integers
+---@field TOLERANCE_STRINGS table @Contains the readable strings of the tolerances, including units
 ---@field tramlineWidthSlider OptionSlider @The UI element which allows the user to select the tramline width. Defined in XML.
----@field toleranceLabel Text @The label which describes the tolerance setting. Defined in XML.
 ---@field toleranceSlider OptionSlider @The UI element which allows the user to select the tolerance for the tramline calculation. Defined in XML.
 TramlineShopFilterDialog = {
-	DIALOG_ID = "TramlineShopFilterDialog"
+	DIALOG_ID = "TramlineShopFilterDialog",
+	TRAMLINE_WIDTHS = {},
+	TRAMLINE_WIDTH_STRINGS = {},
+	TOLERANCES = {},
+	TOLERANCE_STRINGS = {}
 }
+
+-- One-time initialization
+for i = 1, 48 do
+	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTHS, i)
+	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS, g_i18n:formatDistance(i, 0, false))
+end
+for i = 1, 10 do
+	table.insert(TramlineShopFilterDialog.TOLERANCES, i / 10)
+	table.insert(TramlineShopFilterDialog.TOLERANCE_STRINGS, g_i18n:formatDistance(i / 10, 1, false))
+	print(g_i18n:formatDistance(i/10, 1, false))
+end
+
 -- Inherit from a yes/no dialog which is the closest base to what we want
 local TramlineShopFilterDialog_mt = Class(TramlineShopFilterDialog, YesNoDialog)
 
@@ -29,10 +48,11 @@ function TramlineShopFilterDialog.new(callbackTarget, filterFunc)
 end
 
 ---Registers the dialog with g_gui
----@param instance TramlineShopFilterDialog @The instance to register
-function TramlineShopFilterDialog.register(instance)
+function TramlineShopFilterDialog:register()
 	local xmlPath = Utils.getFilename("gui/TramlineShopFilterDialog.xml", g_currentModDirectory)
-	g_gui:loadGui(xmlPath, TramlineShopFilterDialog.DIALOG_ID, instance)
+	g_gui:loadGui(xmlPath, TramlineShopFilterDialog.DIALOG_ID, self)
+	self.tramlineWidthSlider:setTexts(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS)
+	self.toleranceSlider:setTexts(TramlineShopFilterDialog.TOLERANCE_STRINGS)
 end
 
 ---Reacts on yes/no presses
@@ -45,12 +65,6 @@ end
 
 ---Displays the dialog
 function TramlineShopFilterDialog:show()
-	-- Temp:
-	self.tramlineWidthSlider:setTexts({"1","2","3","4","5","6", "8", "10", "12", "18", "24", "48"})
-	self.tramlineWidthSlider:setState(10)
-	self.toleranceSlider:setTexts({"0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"})
-	self.toleranceSlider:setState(1)
-	---------
 
 
 	self:setDialogType(DialogElement.TYPE_QUESTION)
