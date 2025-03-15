@@ -14,8 +14,8 @@ TODO List:
 [x] Resetting filters when closing the shop
 [ ] Multiplayer tests
 [ ] Translations
-[ ] Handle half-side shutoff (without half-side shutoff, you need an odd number of runs)
-[ ] Bug: Filter and confirm, open seeders, go back, filter and cancel, open seeders => used vehicles are being displayed
+[x] Handle half-side shutoff (without half-side shutoff, you need an odd number of runs)
+[x] Bug: Filter and confirm, open seeders, go back, filter and cancel, open seeders => used vehicles are being displayed
 
 Convenience stuff:
 [ ] Updating a category while the category is open
