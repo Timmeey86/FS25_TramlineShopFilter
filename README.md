@@ -10,8 +10,8 @@ This mod is in early development stage. It doesn't work yet.
 TODO List:
 [x] Opening the filter dialog through a hotkey or button
 [ ] Checking compatibility with various shop search and sorting mods
-[ ] Resetting filters when cancelling the dialog
-[ ] Resetting filters when closing the shop
+[x] Resetting filters when cancelling the dialog
+[x] Resetting filters when closing the shop
 [ ] Multiplayer tests
 [ ] Translations
 

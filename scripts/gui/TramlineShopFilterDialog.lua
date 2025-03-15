@@ -47,6 +47,8 @@ function TramlineShopFilterDialog.new(callbackTarget, filterFunc)
 	TabbedMenuWithDetails.onOpen = Utils.overwrittenFunction(
 		TabbedMenuWithDetails.onOpen,
 		function(menu, superFunc, ...) self:registerHotkeyOnMenuOpen(menu, superFunc, ...) end)
+		-- Reset the filter when the shop closes
+		TabbedMenuWithDetails.exitMenu = Utils.prependedFunction(TabbedMenuWithDetails.exitMenu, function() self:onMenuClose() end)
 	return self
 end
 
@@ -63,17 +65,30 @@ end
 ---Reacts on yes/no presses and calls the callback function which was supplied to the constructor, in the yes case
 ---@param yesWasPressed boolean @True if yes was pressed, false otherwise
 function TramlineShopFilterDialog:onYesNo(yesWasPressed)
+	local tramlineWidth, tolerance
 	if yesWasPressed then
-		local tramlineWidth = tonumber(TramlineShopFilterDialog.TRAMLINE_WIDTHS[self.tramlineWidthSlider.state or 1])
-		local tolerance = tonumber(TramlineShopFilterDialog.TOLERANCES[self.toleranceSlider.state or 1])
-		self.filterFunc(self.filterFuncTarget, tramlineWidth, tolerance)
+		tramlineWidth = tonumber(TramlineShopFilterDialog.TRAMLINE_WIDTHS[self.tramlineWidthSlider.state or 1])
+		tolerance = tonumber(TramlineShopFilterDialog.TOLERANCES[self.toleranceSlider.state or 1])
+	else
+		tramlineWidth = nil
+		tolerance = nil
 	end
+	self.filterFunc(self.filterFuncTarget, tramlineWidth, tolerance)
 end
 
 ---Displays the dialog
 function TramlineShopFilterDialog:show()
 	self:setDialogType(DialogElement.TYPE_QUESTION)
 	g_gui:showDialog(TramlineShopFilterDialog.DIALOG_ID)
+end
+
+---Checks whether or not the filter dialog may be shown. Note that this currently requires having the shop open at the vehicle overview.
+---@return boolean @True if it may be shown.
+local function dialogMayBeShown()
+	local shopIsOpen = g_shopMenu.isOpen
+	local shopIsAtToplevel = #g_shopMenu:getStack() == 1
+	local vehicleTabIsOpen = g_shopMenu.pageSelector.state == g_shopMenu.pagingElement:getPageMappingIndexByElement(g_shopMenu.pageShopVehicles)
+	return shopIsOpen and shopIsAtToplevel and vehicleTabIsOpen
 end
 
 ---Registers a hotkey for the dialog when the proper shop menu is being opened
@@ -84,7 +99,7 @@ function TramlineShopFilterDialog:registerHotkeyOnMenuOpen(menu, superFunc, ...)
 	-- Make sure we call the base game implementation which also makes sure we don't break other mods
 	local ret = superFunc(menu, ...)
 
-	if g_shopMenu.isOpen then
+	if dialogMayBeShown() then
 
 		-- Shop is open, register the hotkey now
 		local success, actionEventId = g_inputBinding:registerActionEvent(InputAction.TRAMLINE_FILTER, self, TramlineShopFilterDialog.onHotkeyPressed, false, true, false, true, nil, true)
@@ -100,7 +115,14 @@ end
 
 ---Displays the dialog when the hotkey is pressed while the shop is open
 function TramlineShopFilterDialog:onHotkeyPressed()
-	if g_shopMenu.isOpen then
+	if dialogMayBeShown() then
 		self:show()
+	end
+end
+
+function TramlineShopFilterDialog:onMenuClose()
+	if g_shopMenu.isOpen then
+		-- Reset filters
+		self.filterFunc(self.filterFuncTarget, nil, nil)
 	end
 end

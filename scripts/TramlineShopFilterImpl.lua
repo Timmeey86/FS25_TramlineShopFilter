@@ -2,6 +2,8 @@
 ---@class TramlineShopFilterImpl
 ---@field currentTramlineWidth number|nil @The current tramline width to filter for or nil to do nothing
 ---@field currentTolerance number|nil @The current tolerance to filter for
+---@field originalItems table @The list of original items before the filter was applied
+---@field filterWasApplied boolean @True if the filter is currently active and needs to be reset
 TramlineShopFilterImpl = {}
 TramlineShopFilterImpl_mt = Class(TramlineShopFilterImpl)
 
@@ -11,6 +13,8 @@ function TramlineShopFilterImpl.new()
 	local self = setmetatable({}, TramlineShopFilterImpl_mt)
 	self.currentTramlineWidth = nil
 	self.currentTolerance = nil
+	self.originalItems = nil
+	self.filterWasApplied = false
 	ShopItemsFrame.setDisplayItems = Utils.overwrittenFunction(
 		ShopItemsFrame.setDisplayItems, 
 		function(shopItemsFrame, superFunc, items, ...) self:filterIfNeeded(shopItemsFrame, superFunc, items, ...) end)
@@ -32,28 +36,38 @@ end
 ---@param ... unknown @A list of additional parameters we don't care about. These are forwarded to superFunc.
 function TramlineShopFilterImpl:filterIfNeeded(shopItemsFrame, superFunc, items, ...)
 	local filteredItems = nil
-	if items and self.currentTramlineWidth then
+	-- Remember the original list of items once
+	if not self.originalItems then
+		self.originalItems = items
+	end
+	-- Restore the original list if the dialog was cancelled
+	if not self.currentTramlineWidth and self.filterWasApplied then
+		items = self.originalItems
+		self.filterWasApplied = false
+	-- else: Filter if needed
+	elseif items and self.currentTramlineWidth then
 		filteredItems = {}
 		for _, item in ipairs(items) do
 			local storeItem = item.storeItem
 			if not storeItem.specs then
-				Logging.error("No specs for " .. storeItem.xmlFilename)
-				printCallstack()
-				break
-			end
-			-- Make sure the work widths are already retrieved (only once per item and game session)
-			WorkWidthRetriever.injectWorkWidths(storeItem)
-			if storeItem.FS25_TramlineWidthChecker and storeItem.FS25_TramlineWidthChecker.workWidths then
-				for _, workWidth in ipairs(storeItem.FS25_TramlineWidthChecker.workWidths) do
-					if TramlineWidthChecker.workWidthIsCompatible(tonumber(workWidth), self.currentTramlineWidth, self.currentTolerance or 0) then
-						table.insert(filteredItems, item)
-						break -- the inner loop and continue with the next item
-					end
-				end
+				Logging.warning("No specs for " .. storeItem.xmlFilename)
 			else
-				Logging.warning("No work width data for " .. storeItem.xmlFilename)
+				-- Make sure the work widths are already retrieved (only once per item and game session)
+				WorkWidthRetriever.injectWorkWidths(storeItem)
+				if storeItem.FS25_TramlineWidthChecker and storeItem.FS25_TramlineWidthChecker.workWidths then
+					for _, workWidth in ipairs(storeItem.FS25_TramlineWidthChecker.workWidths) do
+						if TramlineWidthChecker.workWidthIsCompatible(tonumber(workWidth), self.currentTramlineWidth, self.currentTolerance or 0) then
+							table.insert(filteredItems, item)
+							break -- the inner loop and continue with the next item
+						end
+					end
+				else
+					Logging.warning("No work width data for " .. storeItem.xmlFilename)
+				end
 			end
 		end
+		-- Remember the fact that we've filtered the items
+		self.filterWasApplied = true
 	end
 	-- Supply the list of filtered items if it was built, or the original one if not
 	return superFunc(shopItemsFrame, filteredItems or items, ...)
