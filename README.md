@@ -12,7 +12,7 @@ TODO List:
 [ ] Checking compatibility with various shop search and sorting mods
 [x] Resetting filters when cancelling the dialog
 [x] Resetting filters when closing the shop
-[ ] Multiplayer tests
+[x] Multiplayer tests
 [ ] Translations
 [x] Handle half-side shutoff (without half-side shutoff, you need an odd number of runs)
 [x] Bug: Filter and confirm, open seeders, go back, filter and cancel, open seeders => used vehicles are being displayed
