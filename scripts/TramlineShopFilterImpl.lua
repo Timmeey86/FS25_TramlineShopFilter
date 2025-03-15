@@ -2,6 +2,7 @@
 ---@class TramlineShopFilterImpl
 ---@field currentTramlineWidth number|nil @The current tramline width to filter for or nil to do nothing
 ---@field currentTolerance number|nil @The current tolerance to filter for
+---@field allowEvenMultipliers boolean|nil @True if even multipliers are allowed in addition to odd ones.
 ---@field originalItems table @The list of original items before the filter was applied
 ---@field filterWasApplied boolean @True if the filter is currently active and needs to be reset
 TramlineShopFilterImpl = {}
@@ -24,9 +25,11 @@ end
 ---Sets new tramline data for filtering the shop
 ---@param tramlineWidth number|nil @The tramline width to filter for or nil otherwise
 ---@param tolerance number|nil @The tolerance to use for calculations or nil otherwise
-function TramlineShopFilterImpl:applyTramlineData(tramlineWidth, tolerance)
+---@param allowEvenMultipliers boolean|nil @True if even multipliers are allowed in addition to odd multipliers, false if only odd multipliers are allowed
+function TramlineShopFilterImpl:applyTramlineData(tramlineWidth, tolerance, allowEvenMultipliers)
 	self.currentTramlineWidth = tramlineWidth
 	self.currentTolerance = tolerance
+	self.allowEvenMultipliers = allowEvenMultipliers
 end
 
 ---Hooks into the function which processes the display items and filters items if desired
@@ -56,7 +59,7 @@ function TramlineShopFilterImpl:filterIfNeeded(shopItemsFrame, superFunc, items,
 				WorkWidthRetriever.injectWorkWidths(storeItem)
 				if storeItem.FS25_TramlineWidthChecker and storeItem.FS25_TramlineWidthChecker.workWidths then
 					for _, workWidth in ipairs(storeItem.FS25_TramlineWidthChecker.workWidths) do
-						if TramlineWidthChecker.workWidthIsCompatible(tonumber(workWidth), self.currentTramlineWidth, self.currentTolerance or 0) then
+						if TramlineWidthChecker.workWidthIsCompatible(tonumber(workWidth), self.currentTramlineWidth, self.currentTolerance or 0, not self.allowEvenMultipliers) then
 							table.insert(filteredItems, item)
 							break -- the inner loop and continue with the next item
 						end

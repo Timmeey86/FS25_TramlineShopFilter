@@ -9,6 +9,7 @@
 ---@field TOLERANCE_STRINGS table @Contains the readable strings of the tolerances, including units
 ---@field tramlineWidthSlider OptionSlider @The UI element which allows the user to select the tramline width. Defined in XML.
 ---@field toleranceSlider OptionSlider @The UI element which allows the user to select the tolerance for the tramline calculation. Defined in XML.
+---@field allowEvenMultiplier BinaryOptionElement @The UI element which toggles between allowing only odd numbers or odd and even numbers. Defined in XML.
 TramlineShopFilterDialog = {
 	DIALOG_ID = "TramlineShopFilterDialog",
 	TRAMLINE_WIDTHS = {},
@@ -33,7 +34,7 @@ local TramlineShopFilterDialog_mt = Class(TramlineShopFilterDialog, YesNoDialog)
 
 ---Creates a new instance
 ---@param callbackTarget table @The target table which shall receive callbacks. This will only receive "yes" callbacks since the "no" press will simply close the dialog
----@param filterFunc function @The callback for when the user clicks yes. This will receive the callback target, the tramline width and the tolerance as arguments.
+---@param filterFunc function @The callback for when the user clicks yes. This will receive the callback target, the tramline width, the tolerance and a flag which allows even multipliers if true as arguments.
 ---@return TramlineShopFilterDialog @The new instance
 function TramlineShopFilterDialog.new(callbackTarget, filterFunc)
 	local self = YesNoDialog.new(callbackTarget, TramlineShopFilterDialog_mt)
@@ -60,6 +61,7 @@ function TramlineShopFilterDialog:register()
 	self.tramlineWidthSlider:setTexts(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS)
 	self.toleranceSlider.textElement.textUpperCase = false
 	self.toleranceSlider:setTexts(TramlineShopFilterDialog.TOLERANCE_STRINGS)
+	self.allowEvenMultiplier:setIsChecked(false) -- without Pro Seed, even numbers of lines per tramline is a mess, so default is false
 end
 
 ---Reacts on yes/no presses and calls the callback function which was supplied to the constructor, in the yes case
@@ -73,7 +75,7 @@ function TramlineShopFilterDialog:onYesNo(yesWasPressed)
 		tramlineWidth = nil
 		tolerance = nil
 	end
-	self.filterFunc(self.filterFuncTarget, tramlineWidth, tolerance)
+	self.filterFunc(self.filterFuncTarget, tramlineWidth, tolerance, self.allowEvenMultiplier:getIsChecked())
 end
 
 ---Displays the dialog

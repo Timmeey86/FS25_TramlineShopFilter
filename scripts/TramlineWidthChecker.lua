@@ -18,18 +18,20 @@ end
 ---@param workWidth number @The work width of an implement
 ---@param tramlineWidth number @The desired tramline width
 ---@param tolerance number @The tolerance of the resulting tramline width
+---@param forceOddMultiplier boolean @True if an odd work width multiplier is forced. For an even multiplier, you need the to have the "half-side shutoff" feature
 ---@return boolean @True if the work width is suitable for the tramline
-function TramlineWidthChecker.workWidthIsCompatible(workWidth, tramlineWidth, tolerance)
+function TramlineWidthChecker.workWidthIsCompatible(workWidth, tramlineWidth, tolerance, forceOddMultiplier)
 	if not tonumber(workWidth) or not tonumber(tramlineWidth) or not tonumber(tolerance) or
-		tonumber(workWidth) <= 0 or tonumber(tramlineWidth) <= 0 or tonumber(tolerance) < 0 then
-		Logging.warning("Received invalid input values: %s, %s, %s", workWidth, tramlineWidth, tolerance)
+		tonumber(workWidth) <= 0 or tonumber(tramlineWidth) <= 0 or tonumber(tolerance) < 0 or forceOddMultiplier == nil then
+		Logging.warning("Received invalid input values: %s, %s, %s, %s", workWidth, tramlineWidth, tolerance, forceOddMultiplier)
 		return false
 	end
 
 	local width = workWidth
 	while width <= tramlineWidth + tolerance do
 		if between(width, tramlineWidth - tolerance, tramlineWidth + tolerance) then
-			return true
+			-- force an odd multiplier if desired, otherwise return true either way
+			return not forceOddMultiplier or (tramlineWidth / workWidth) % 2 == 1
 		end
 		width = width + workWidth
 	end
