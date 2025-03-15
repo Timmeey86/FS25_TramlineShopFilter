@@ -42,6 +42,11 @@ function TramlineShopFilterDialog.new(callbackTarget, filterFunc)
 
 	-- Forward the yes/no click to this class, which will then only forward it to the callback target in the "yes" case
 	self:setCallback(TramlineShopFilterDialog.onYesNo, self)
+
+	-- Register a hotkey when the shop opens (we do this here so we can access self)
+	TabbedMenuWithDetails.onOpen = Utils.overwrittenFunction(
+		TabbedMenuWithDetails.onOpen,
+		function(menu, superFunc, ...) self:registerHotkeyOnMenuOpen(menu, superFunc, ...) end)
 	return self
 end
 
@@ -69,4 +74,33 @@ end
 function TramlineShopFilterDialog:show()
 	self:setDialogType(DialogElement.TYPE_QUESTION)
 	g_gui:showDialog(TramlineShopFilterDialog.DIALOG_ID)
+end
+
+---Registers a hotkey for the dialog when the proper shop menu is being opened
+---@param menu TabbedMenuWithDetails @The menu we are hooking into
+---@param superFunc function @The function we are overwriting
+---@param ... unknown @A list of additional parameters which are being forwarded but not processed
+function TramlineShopFilterDialog:registerHotkeyOnMenuOpen(menu, superFunc, ...)
+	-- Make sure we call the base game implementation which also makes sure we don't break other mods
+	local ret = superFunc(menu, ...)
+
+	if g_shopMenu.isOpen then
+
+		-- Shop is open, register the hotkey now
+		local success, actionEventId = g_inputBinding:registerActionEvent(InputAction.TRAMLINE_FILTER, self, TramlineShopFilterDialog.onHotkeyPressed, false, true, false, true, nil, true)
+		if success then
+			-- We don't want this to block anything else in the F1 menu
+			g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+		end
+	end
+
+	-- return the original return value
+	return ret
+end
+
+---Displays the dialog when the hotkey is pressed while the shop is open
+function TramlineShopFilterDialog:onHotkeyPressed()
+	if g_shopMenu.isOpen then
+		self:show()
+	end
 end

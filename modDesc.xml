@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
   <author>Farmsim Tim (timmeey86)</author>
-  <version>0.1.0.0</version>
+  <version>0.1.0.4</version>
   <title>
     <en>Tramline Shop Filter</en>
     <de>Fahrgassen-Shopfilter</de>
@@ -31,5 +31,13 @@ GitHub-Link: https://github.com/Timmeey86/FS25_TramlineShopFilter
     <sourceFile filename="scripts/TramlineShopFilterImpl.lua" />
     <sourceFile filename="scripts/TramlineShopFilter.lua" />
   </extraSourceFiles>
+  <inputBinding>
+    <actionBinding action="TRAMLINE_FILTER">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_t" />
+    </actionBinding>
+  </inputBinding>
+  <actions>
+    <action name="TRAMLINE_FILTER" />
+  </actions>
   <l10n filenamePrefix="i18n/locale" />
 </modDesc>
