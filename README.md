@@ -7,6 +7,16 @@
 ## Mod description
 
 This mod is in early development stage. It doesn't work yet.
+TODO List:
+[ ] Opening the filter dialog through a hotkey or button
+[ ] Checking compatibility with various shop search and sorting mods
+[ ] Resetting filters when cancelling the dialog
+[ ] Resetting filters when closing the shop
+[ ] Multiplayer tests
+[ ] Translations
+
+Convenience stuff:
+[ ] Updating a category while the category is open
 
 ## Screenshots
 
