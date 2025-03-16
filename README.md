@@ -6,19 +6,7 @@
 
 ## Mod description
 
-This mod is in early development stage. It doesn't work yet.
-TODO List:
-[x] Opening the filter dialog through a hotkey or button
-[ ] Checking compatibility with various shop search and sorting mods
-[x] Resetting filters when cancelling the dialog
-[x] Resetting filters when closing the shop
-[x] Multiplayer tests
-[ ] Translations
-[x] Handle half-side shutoff (without half-side shutoff, you need an odd number of runs)
-[x] Bug: Filter and confirm, open seeders, go back, filter and cancel, open seeders => used vehicles are being displayed
-
-Convenience stuff:
-[ ] Updating a category while the category is open
+This mod is in an early development stage.
 
 ## Screenshots
 

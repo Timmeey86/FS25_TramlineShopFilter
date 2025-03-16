@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<l10n>
+	<translationContributors/>
+	<texts>
+		<text name="input_TRAMLINE_FILTER" text="Fahrgassen-Filter anwenden" />
+		<text name="tsf_dialogTitle" text="Fahrgassen-Shopfilter" />
+		<text name="tsf_dialogIntro" text="Der Shop wird so gefiltert, dass nur noch Geräte angezeigt werden, die zu den folgenden Parametern passen:" />
+		<text name="tsf_tramlineLabel" text="Arbeitsbreite der Spritze" />
+		<text name="tsf_toleranceLabel" text="Max. Unterschied zwischen der Arbeitsbreite der Spritze und der multiplizierten Arbeitsbreite des Geräts" />
+		<text name="tsf_multiplierLabel" text="Gerade Teiler der Arbeitsbreite erlauben" />
+	</texts>
+</l10n>
