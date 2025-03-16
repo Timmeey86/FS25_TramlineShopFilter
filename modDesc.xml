@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
   <author>Farmsim Tim (timmeey86)</author>
-  <version>0.1.1.9</version>
+  <version>0.2.0.0</version>
   <title>
     <en>Tramline Shop Filter</en>
     <de>Fahrgassen-Shopfilter</de>
   </title>
   <description>
     <en><![CDATA[
-Description: 
+Description: This mod allows filtering the shop for work widths which are compatible with a target sprayer width.
+This is intended for players who are playing with tramlines/CTF, players playing on narrow fields and especially players who are practicing strip cropping, alley cropping or similar.
 
-Hotkeys: 
+By default, only tools with a work width which are an odd factor of the sprayer width are shown. For example, a 3m seeder would not be shown for a 12m sprayer width since the tramline would not be in the center. A 4m seeder would fit, however (no tramline + tramline + no tramline = 12m).
+It is however possible to also allow even factors, for example if there is plenty of space beyond the field border or when using advanced techniques like half-side shutoff or similar.
+
+The filter dialog can only be opened while in the main shop menu, and closing the shop or cancelling the filter dialog will reset the filter.
+
+This mod is compatible with the "Enhanced Shop Sorting" and "Store Search" mods.
+
+Hotkeys: [T] opens the filter dialog while in the main page of the shop.
 
 GitHub link: https://github.com/Timmeey86/FS25_TramlineShopFilter
 ]]></en>
     <de><![CDATA[
-Beschreibung: 
+Beschreibung: Diese Mod erlaubt es, den Shop nach Arbeitsbreiten zu filtern, die mit der gewünschten Arbeitsbreite einer Spritze kompatibel sind.
+Dies ist für Spieler gedacht, die mit Fahrgassen oder auf schmalen Feldern spielen und vor allem für Spieler, die Streifenanbau, Alley Cropping oder ähnliches anwenden.
 
-Tastenkombinationen: 
+Standardmäßig werden nur Geräte mit Arbeitsbreiten, die ungerade Teiler der Spritzenbreite sind, angezeigt. Beispielsweise würde ein 3m Sägerät für eine 12m Spritzenbreite nicht angezeigt werden, da die Fahrgasse dann nicht in der Mitte wäre. Ein 4m Sägerät wäre jedoch passend (Keine Fahrgasse + Fahrgasse + Keine Fahrgasse = 12m).
+Es ist aber möglich, auch gerade Teiler zu erlauben, zum Beispiel wenn ausreichend Platz am Feldrand ist oder wenn fortgeschrittene Techniken wie halbseitige Abschaltung oder ähnlich angewandt werden.
+
+Der Filterdialog kann nur im Hauptmenü des Shops geöffnet werden, und das Schließen des Shops sowie das Abbrechen des Filterdialogs setzen den Filter zurück.
+
+Diese Mod ist mit den "Suche Im Laden" und "Verbesserte Shop-Sortierungen" Mods kompatibel.
+
+Tastenkombinationen: [T] öffnet den Filterdialog, solange man sich im Hauptmenü des Shops befindet.
 
 GitHub-Link: https://github.com/Timmeey86/FS25_TramlineShopFilter
 ]]></de>
