@@ -5,8 +5,8 @@
 		<text name="input_TRAMLINE_FILTER" text="Apply Tramline Width Filter" />
 		<text name="tsf_dialogTitle" text="Tramline Shop Filter" />
 		<text name="tsf_dialogIntro" text="The shop will be filtered to show only implements which are suitable for the following tramline settings:" />
-		<text name="tsf_tramlineLabel" text="Work width of the sprayer" />
-		<text name="tsf_toleranceLabel" text="Max. difference between work width of the sprayer and multiplied implement width" />
+		<text name="tsf_tramlineLabel" text="Target sprayer width or strip width" />
+		<text name="tsf_toleranceLabel" text="Max. difference between target width and multiplied implement width" />
 		<text name="tsf_multiplierLabel" text="Allow an even work width multiplier" />
 	</texts>
 </l10n>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="94">
   <author>Farmsim Tim (timmeey86)</author>
-  <version>0.2.0.0</version>
+  <version>0.2.0.1</version>
   <title>
     <en>Tramline Shop Filter</en>
     <de>Fahrgassen-Shopfilter</de>
   </title>
   <description>
     <en><![CDATA[
-Description: This mod allows filtering the shop for work widths which are compatible with a target sprayer width.
-This is intended for players who are playing with tramlines/CTF, players playing on narrow fields and especially players who are practicing strip cropping, alley cropping or similar.
+Description: This mod allows filtering the shop for work widths which are compatible with a target tramline (or strip) width.
+This is intended for players who are playing with tramlines/CTF and especially players who are practicing strip cropping, alley cropping (agroforestry) or similar.
 
 By default, only tools with a work width which are an odd factor of the sprayer width are shown. For example, a 3m seeder would not be shown for a 12m sprayer width since the tramline would not be in the center. A 4m seeder would fit, however (no tramline + tramline + no tramline = 12m).
 It is however possible to also allow even factors, which is useful for finding implements like mulchers or rollers for a strip cropping system.
@@ -23,8 +23,8 @@ Hotkeys: [T] opens the filter dialog while in the main page of the shop.
 GitHub link: https://github.com/Timmeey86/FS25_TramlineShopFilter
 ]]></en>
     <de><![CDATA[
-Beschreibung: Diese Mod erlaubt es, den Shop nach Arbeitsbreiten zu filtern, die mit der gewünschten Arbeitsbreite einer Spritze kompatibel sind.
-Dies ist für Spieler gedacht, die mit Fahrgassen oder auf schmalen Feldern spielen und vor allem für Spieler, die Streifenanbau, Alley Cropping oder ähnliches anwenden.
+Beschreibung: Diese Mod erlaubt es, den Shop nach Arbeitsbreiten zu filtern, die mit der gewünschten Arbeitsbreite einer Spritze (oder der geünschten Streifenbreite) kompatibel sind.
+Dies ist für Spieler gedacht, die mit Fahrgassen spielen und vor allem für Spieler, die Streifenanbau, Alley Cropping (Agroforst) oder ähnliches anwenden.
 
 Standardmäßig werden nur Geräte mit Arbeitsbreiten, die ungerade Teiler der Spritzenbreite sind, angezeigt. Beispielsweise würde ein 3m Sägerät für eine 12m Spritzenbreite nicht angezeigt werden, da die Fahrgasse dann nicht in der Mitte wäre. Ein 4m Sägerät wäre jedoch passend (Keine Fahrgasse + Fahrgasse + Keine Fahrgasse = 12m).
 Es ist aber möglich, auch gerade Teiler zu erlauben, was zum Finden von Geräten wie Mulchern oder Walzen für den Streifenanbau nützlich sein kann.

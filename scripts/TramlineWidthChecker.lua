@@ -14,6 +14,14 @@ local function between(value, lowerBound, upperBound)
 	return value >= lowerBound - TramlineWidthChecker.EPSILON and value <= upperBound + TramlineWidthChecker.EPSILON
 end
 
+---Checks whether or not a factor is an odd factor of a number, respecting floating point imprecision
+---@param factor number @The potential factor of the number (should be smaller than the number)
+---@param number number @The number
+---@return boolean @True the first argument is an odd factor of the second argument
+local function isOddFactor(factor, number)
+	return math.abs((factor / number) % 2 - 1) < TramlineWidthChecker.EPSILON
+end
+
 ---Calculates wether or not the given work width is compatible with the given tramline width
 ---@param workWidth number @The work width of an implement
 ---@param tramlineWidth number @The desired tramline width
@@ -28,13 +36,12 @@ function TramlineWidthChecker.workWidthIsCompatible(workWidth, tramlineWidth, to
 	end
 
 	local width = workWidth
-	while width <= tramlineWidth + tolerance do
+	while width <= tramlineWidth + tolerance + TramlineWidthChecker.EPSILON do
 		if between(width, tramlineWidth - tolerance, tramlineWidth + tolerance) then
 			-- force an odd multiplier if desired, otherwise return true either way
-			return not forceOddMultiplier or (tramlineWidth / workWidth) % 2 == 1
+			return not forceOddMultiplier or isOddFactor(tramlineWidth, workWidth - tolerance) or isOddFactor(tramlineWidth, workWidth + tolerance)
 		end
 		width = width + workWidth
 	end
-
 	return false
 end
