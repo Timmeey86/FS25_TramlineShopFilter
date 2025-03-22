@@ -21,12 +21,12 @@ TramlineShopFilterDialog = {
 -- One-time initialization
 for i = 1, 48 do
 	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTHS, i)
-	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS, g_i18n:formatDistance(i, 0, false))
+	-- Note: We're not using g_i18n:formatDistance since work widths are always shown in meters ingame, independent of unit settings
+	table.insert(TramlineShopFilterDialog.TRAMLINE_WIDTH_STRINGS, ("%d m"):format(i))
 end
 for i = 0, 10 do
 	table.insert(TramlineShopFilterDialog.TOLERANCES, i / 10)
-	table.insert(TramlineShopFilterDialog.TOLERANCE_STRINGS, g_i18n:formatDistance(i / 10, 1, false))
-	print(g_i18n:formatDistance(i/10, 1, false))
+	table.insert(TramlineShopFilterDialog.TOLERANCE_STRINGS, ("%.1f m"):format(i / 10))
 end
 
 -- Inherit from a yes/no dialog which is the closest base to what we want

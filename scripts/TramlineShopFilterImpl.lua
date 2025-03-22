@@ -37,7 +37,6 @@ function TramlineShopFilterImpl:filterIfNeeded(shopItemsFrame, superFunc, items,
 	local filteredItems = nil
 	-- Restore the original list if the dialog was cancelled
 	if items and self.currentTramlineWidth then
-		print("Filtering items")
 		filteredItems = {}
 		for _, item in ipairs(items) do
 			local storeItem = item.storeItem
